@@ -1,8 +1,9 @@
 import React from 'react';
 import gql from "graphql-tag";
 import {graphql} from "react-apollo";
+import {Link} from "react-router-dom";
 
-const ArticlePreview = ({data}) => {
+const ArticlePreview = ({id, title, authors, releaseDate, teaser}) => {
     return (
         <div style={{
             marginBottom: 50,
@@ -11,17 +12,15 @@ const ArticlePreview = ({data}) => {
             borderColor: '#b4b5c4',
             borderWidth: 2
         }}>
-            <b><p>{data.title}</p></b>
+          <Link to={`/articles/${id}`}><h3>{title}</h3></Link>
             <p>
-                {data.authors[0].name} ({data.releaseDate.split("T")[0]}): <i>{data.teaser}</i>
+                {authors[0].name} ({releaseDate.split("T")[0]}): <i>{teaser}</i>
             </p>
         </div>
     )
 }
 
 const ArticlesStream = ({loading, articles, error}) => {
-    console.log(articles)
-
     if (loading) {
         return <p>Loading ...</p>
     }
@@ -32,7 +31,7 @@ const ArticlesStream = ({loading, articles, error}) => {
 
     return (
         <div style={{paddingLeft: 300, paddingRight: 300, paddingTop: 50}}>
-            {articles.map((a, key) => <ArticlePreview key={key} data={a}/>)}
+            {articles.map((a, key) => <ArticlePreview key={key} {...a}/>)}
         </div>
     )
 }

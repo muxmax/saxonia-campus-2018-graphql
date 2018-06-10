@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ArticlesStream from "./components/ArticlesStream";
 import {Route, BrowserRouter as Router} from "react-router-dom";
+import Article from "./components/Article";
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
               <img src={logo} className="App-logo" alt="logo"/>
               <h1 className="App-title">Bloggie React Frontend mit Apollo</h1>
             </header>
-            <Route path="/" exact component={ArticlesStream}/>
+            <Route path="/articles" exact component={ArticlesStream}/>
+            <Route path="/articles/:articleId" component={Article}/>
           </div>
         </Router>
     );
